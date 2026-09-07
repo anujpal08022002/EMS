@@ -9,7 +9,7 @@ export const inngest = new Inngest({ id: "EMSPRO" });
 
 // Auto Check-out for employees who forget to check-out
 const autoCheckOut = inngest.createFunction(
-  { id: "auto-check-out", trigger: [{ event: "employee/check-out" }] },
+  { id: "auto-check-out", triggers: [{ event: "employee/check-out" }] },
 
   async ({ event, step }) => {
     const { employeeId, attendanceId } = event.data;
@@ -64,7 +64,7 @@ const autoCheckOut = inngest.createFunction(
 
 // Send email to admin, If admin doesn't take any action on the leave request within 24 hours
 const leaveApplicationReminder = inngest.createFunction(
-  { id: "leave-application-reminder", trigger: [{ event: "leave/pending" }] },
+  { id: "leave-application-reminder", triggers: [{ event: "leave/pending" }] },
 
   async ({ event, step }) => {
     const { leaveApplicationId } = event.data;
@@ -103,7 +103,7 @@ const leaveApplicationReminder = inngest.createFunction(
 const attendanceReminderCron = inngest.createFunction(
   {
     id: "attendance-reminder-cron",
-    trigger: [{ cron: "TZ=Asia/Kolkata 30 11 * * *" }],
+    triggers: [{ cron: "TZ=Asia/Kolkata 30 11 * * *" }],
   }, // 06:00 AM UTC = (11:30 AM IST)
 
   async ({ step }) => {
